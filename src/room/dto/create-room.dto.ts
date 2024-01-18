@@ -1,0 +1,12 @@
+import { IsNumber, IsString } from "class-validator";
+
+export class CreateRoomDto {
+  @IsString()
+  name: string;
+
+  @IsString()
+  description: string;
+
+  @IsNumber()
+  ownerId: number;
+}

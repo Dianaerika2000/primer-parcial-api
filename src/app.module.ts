@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { CommonModule } from './common/common.module';
+import { RoomModule } from './room/room.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { CommonModule } from './common/common.module';
     AuthModule,
     UserModule,
     CommonModule,
+    RoomModule,
   ],
   controllers: [AppController],
   providers: [AppService],

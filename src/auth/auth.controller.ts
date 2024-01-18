@@ -13,9 +13,9 @@ export class AuthController {
     return this.authService.signIn(signInDto);
   }
 
-  @HttpCode(HttpStatus.CREATED)
-  @Post('register')
-  signUp(@Body() signUpDto: SignUpDto) {
-    return this.authService.signUp(signUpDto);
-  }
+  // @HttpCode(HttpStatus.CREATED)
+  // @Post('register')
+  // signUp(@Body() signUpDto: SignUpDto) {
+  //   return this.authService.signUp(signUpDto);
+  // }
 }
