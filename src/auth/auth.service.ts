@@ -30,20 +30,17 @@ export class AuthService {
     };
   }
 
-  // async signUp(signUpDto: SignUpDto): Promise<any> {
-  //   const userExists = await this.usersService.findByUsernameOrEmail(
-  //     signUpDto.username,
-  //     signUpDto.email,
-  //   );
+  async signUp(signUpDto: SignUpDto): Promise<any> {
+    const userExists = await this.userRepository.findOneBy({ email: signUpDto.email });
 
-  //   if (userExists) {
-  //     throw new Error('El usuario o el correo electrónico ya están registrados.');
-  //   }
+    if (userExists) {
+      throw new Error('El usuario o el correo electrónico ya están registrados.');
+    }
 
-  //   const newUser = await this.usersService.create(signUpDto);
+    const newUser = this.userRepository.create(signUpDto);
 
-  //   return newUser;
-  // }
+    return await this.userRepository.save(newUser);
+  }
 
   private getJwtToken(payload: JwtPayload) {
     const token = this.jwtService.sign(payload);
