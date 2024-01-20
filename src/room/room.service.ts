@@ -5,6 +5,7 @@ import { Room } from './entities/room.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserService } from 'src/user/user.service';
+import { InvitationDto } from './dto/invitation.dto';
 
 @Injectable()
 export class RoomService {
@@ -64,6 +65,20 @@ export class RoomService {
     };
 
     return await this.roomRepository.save(updatedRoom);
+  }
+
+  async findByInvitationToken(invitationDto: InvitationDto) {
+    const {jwt, invitationToken} = invitationDto;
+
+    const room = await this.roomRepository.findOneBy({invitation_token: invitationToken});
+
+    if(!room){
+      throw new NotFoundException(`Room with invitation token ${ invitationToken } not found`);
+    }
+    
+    const linkInvitation = `http://54.71.131.29:8080/model-c4?room=${room.id}&username=${jwt}`;
+
+    return linkInvitation;
   }
 
   remove(id: number) {
