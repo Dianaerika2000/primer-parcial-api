@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { CommonModule } from './common/common.module';
 import { RoomModule } from './room/room.module';
+import { OpenaiModule } from './openai/openai.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { RoomModule } from './room/room.module';
     UserModule,
     CommonModule,
     RoomModule,
+    OpenaiModule,
   ],
   controllers: [AppController],
   providers: [AppService],

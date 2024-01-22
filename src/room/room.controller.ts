@@ -3,6 +3,7 @@ import { RoomService } from './room.service';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
 import { InvitationDto } from './dto/invitation.dto';
+import { CreateOpenaiDto } from 'src/openai/dto/create-openai.dto';
 
 @Controller('room')
 export class RoomController {
@@ -43,4 +44,13 @@ export class RoomController {
     return await this.roomService.findByInvitationToken(invitationDto);
   }
 
+  @Get(':id/export-diagram')
+  async exportDiagram(@Param('id') id: string){
+    return await this.roomService.exportDiagramToXMI(+id);
+  }
+
+  @Get(':id/code')
+  async generateCodeFromDiagram(@Param('id') id: number, @Body() generateCodeDto: CreateOpenaiDto){
+    return await this.roomService.generateCodeFromDiagram(id, generateCodeDto);
+  }
 }
