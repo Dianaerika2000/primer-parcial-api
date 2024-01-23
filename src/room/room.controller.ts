@@ -49,7 +49,7 @@ export class RoomController {
     return await this.roomService.exportDiagramToXMI(+id);
   }
 
-  @Get(':id/code')
+  @Post(':id/code')
   async generateCodeFromDiagram(@Param('id') id: number, @Body() generateCodeDto: CreateOpenaiDto){
     return await this.roomService.generateCodeFromDiagram(id, generateCodeDto);
   }
